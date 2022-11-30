@@ -1,20 +1,20 @@
 {
-    "name": "package-skeleton",
+    "name": "ps-code-exercise-01",
     "version": "1.0.0",
-    "description": "{{package.description}}",
-    "author": "{{package.author.name}} <{{package.author.email}}>",
+    "description": "ps code exercise 1",
+    "author": "Patrick Organ <patrick@permafrost.dev>",
     "license": "MIT",
     "keywords": [
         "nodejs",
         "typescript"
     ],
-    "homepage": "https://github.com/{{vendor.github}}/{{package.name}}",
+    "homepage": "https://github.com/permafrost-dev/ps-code-exercise-01",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/{{vendor.github}}/{{package.name}}.git"
+        "url": "git+https://github.com/permafrost-dev/ps-code-exercise-01.git"
     },
     "bugs": {
-        "url": "https://github.com/{{vendor.github}}/{{package.name}}/issues"
+        "url": "https://github.com/permafrost-dev/ps-code-exercise-01/issues"
     },
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
@@ -69,8 +69,12 @@
         "ts-jest": "^29.0.3",
         "typescript": "^4.8"
     },
-    "bin": "bin/{{package.name}}",
+    "bin": "bin/ps-code-exercise-01",
     "engines": {
         "node": ">=14.0.0"
+    },
+    "dependencies": {
+        "conf": "^10.2.0",
+        "js-yaml": "^4.1.0"
     }
 }
