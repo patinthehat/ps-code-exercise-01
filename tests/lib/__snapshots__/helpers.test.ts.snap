@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reads the correct contents from a text file 1`] = `
+[
+  "Malcolm Parker",
+  "Zachariah Hardwick",
+  "Cory Paxton",
+  "Yancy Bloodworth",
+  "Star Baldwin",
+  "Elwood Bryson",
+  "Katheryn Bancroft",
+  "Juliana Brassington",
+  "Isadore Thompson",
+  "Jade Ashley",
+  "Noelle Evelyn",
+  "Darcie Gary",
+  "Sherwood Barret",
+  "Winifred Boatwright",
+  "Deanna Bell",
+]
+`;

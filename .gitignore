@@ -2,9 +2,8 @@
 /.vscode
 /build
 /coverage
-/dist
+/dist/*.js
 /node_modules
 /tempdir
 package-lock.json
-yarn.lock
 .env
