@@ -26,21 +26,9 @@ it('reads the correct contents from a text file', () => {
 });
 
 it('normalizes street addresses', () => {
-    const addresses = [
-        '123 Main St.',
-        '123 Main Ave.',
-        '1231 Yonge Street',
-        '456 West 1st Rd.',
-        '9371 Eastwood Avenue'
-    ];
+    const addresses = ['123 Main St.', '123 Main Ave.', '1231 Yonge Street', '456 West 1st Rd.', '9371 Eastwood Avenue'];
 
-    const expectedAddress = [
-        '123 Main Street',
-        '123 Main Avenue',
-        '1231 Yonge Street',
-        '456 West 1st Road',
-        '9371 Eastwood Avenue'
-    ];
+    const expectedAddress = ['123 Main Street', '123 Main Avenue', '1231 Yonge Street', '456 West 1st Road', '9371 Eastwood Avenue'];
 
     addresses.forEach((address, index) => {
         expect(normalizeStreetAddress(address)).toBe(expectedAddress[index]);
