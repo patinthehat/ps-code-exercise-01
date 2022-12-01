@@ -25,14 +25,16 @@ program
     .description('Route shipments for the given input files')
     .argument('[addresses]', 'addresses filename', 'datasets/01/shipments.txt')
     .argument('[driversFile]', 'drivers filename', 'datasets/01/drivers.txt')
-    .action((addresses, driversFile, options) => {
-        addresses = `${__dirname}/${addresses}`;
+    .action((addressesFile, driversFile, options) => {
+        addressesFile = `${__dirname}/${addressesFile}`;
         driversFile = `${__dirname}/${driversFile}`;
 
-        console.log(`Route shipments for ${addresses} and ${driversFile}`);
+        console.log(`Routing shipments for ${addressesFile.replace(__dirname, '.')} and ${driversFile.replace(__dirname, '.')}`);
+        console.log('----');
 
-        const addressesData = readTextFileLines(addresses);
+        const addressesData = readTextFileLines(addressesFile);
         const shipments: Shipment[] = addressesData.map(address => new Shipment(address));
+        const immutableShipments = shipments.slice(0);
 
         const driversData = readTextFileLines(driversFile);
         const drivers: Driver[] = driversData.map(driver => new Driver(driver));
@@ -41,18 +43,41 @@ program
 
         shipmentManager.assignShipmentsToDrivers();
 
+        console.log('Driver assignments for each shipment:');
         console.log(
             shipmentManager.assignments
-                .map(assignment => {
-                    return `${assignment.shipment.streetAddress} => ${assignment.driver.name} (${assignment.suitabilityScore})`;
-                })
+                .map(assignment => `${assignment.shipment.streetAddress} => ${assignment.driver.name} (${assignment.suitabilityScore})`)
                 .join('\n'),
         );
 
-        // shipments.forEach(shipment => {
-        //     const driver = shipment.getBestDriver(drivers);
-        //     console.log(`Shipment: ${shipment.streetAddress}; best driver: ${driver.name}`);
-        // });
+        console.log('----');
+        console.log('Top drivers for each shipment:');
+        console.log('----');
+
+        immutableShipments.forEach(shipment => {
+            const driver = shipment.getBestDriver(drivers);
+            console.log(`Shipment: ${shipment.streetAddress}; best driver: ${driver.name} (${shipment.suitabilityScoreForDriver(driver)})`);
+        });
+
+        console.log('----');
+        console.log('Shipment driver rankings:');
+        console.log('----');
+
+        immutableShipments.forEach(shipment => {
+            console.log(`Shipment: ${shipment.streetAddress};`);
+            const rankedDrivers: any[] = [];
+
+            drivers.forEach(driver => {
+                const score = shipment.suitabilityScoreForDriver(driver);
+                rankedDrivers.push({ driver, score });
+            });
+
+            rankedDrivers.sort((a, b) => b.score - a.score);
+
+            rankedDrivers.forEach((ranked: { driver: Driver; score: number }) => {
+                console.log(`   - ${ranked.driver.name} (${ranked.score})`);
+            });
+        });
     });
 
 program.parse();

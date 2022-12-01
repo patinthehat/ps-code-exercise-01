@@ -12,18 +12,38 @@ export class ShipmentManager {
     public assignShipmentsToDrivers(): void {
         this.assignments = [];
 
-        for (const shipment of this.shipments) {
-            const driver = shipment.getBestDriver(this.drivers);
-            driver.shipment = shipment;
+        const scores = {};
 
-            this.drivers = this.drivers.filter(d => d.name !== driver.name);
-            this.shipments = this.shipments.filter(s => s.address !== shipment.address);
+        this.drivers.forEach(driver => {
+            scores[driver.name] = {};
+        });
 
-            this.assignments.push({
-                driver,
-                shipment,
-                suitabilityScore: shipment.suitabilityScoreForDriver(driver),
+        this.shipments.forEach(shipment => {
+            this.drivers.forEach(driver => {
+                scores[driver.name][shipment.address] = driver.suitabilityScoreForShipment(shipment);
             });
+        });
+
+        for (const driver of this.drivers) {
+            let bestScore = 0;
+            let bestShipment: any = null;
+
+            for (const shipment of this.shipments) {
+                if (scores[driver.name][shipment.address] > bestScore) {
+                    bestScore = scores[driver.name][shipment.address];
+                    bestShipment = shipment;
+                }
+            }
+
+            if (bestShipment) {
+                this.assignments.push({
+                    driver,
+                    shipment: bestShipment,
+                    suitabilityScore: bestScore,
+                });
+
+                this.shipments = this.shipments.filter(shipment => shipment.address.toLowerCase() !== bestShipment.address.toLowerCase());
+            }
         }
     }
 }

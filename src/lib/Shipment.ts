@@ -38,21 +38,23 @@ export class Shipment {
     public suitabilityScoreForDriver(driver: Driver): number {
         const addressStats = calculateStringStatistics(this.streetAddress);
         const nameStats = calculateStringStatistics(driver.name);
+
         let baseSuitabilityScore = 0;
         let result = 0;
 
         // odd
-        if (addressStats.length % 0 !== 0) {
-            baseSuitabilityScore = nameStats.vowels * 1.0;
+        if (addressStats.length % 2 !== 0) {
+            baseSuitabilityScore = nameStats.consonants * 1.0;
         } else {
             baseSuitabilityScore = nameStats.vowels * 1.5;
         }
 
         result = baseSuitabilityScore;
 
-        // common factors
-        if (addressStats.length % 2 === 0 && nameStats.length % 2 === 0) {
-            result *= 1.5;
+        for (let i = 2; i <= addressStats.length; i++) {
+            if (addressStats.length % i === 0 && nameStats.length % i === 0) {
+                result += result * 0.5;
+            }
         }
 
         return result;
@@ -63,7 +65,8 @@ export class Shipment {
         let bestScore = 0;
 
         drivers.forEach(driver => {
-            const score = this.suitabilityScoreForDriver(driver);
+            const score = driver.suitabilityScoreForShipment(this); //this.suitabilityScoreForDriver(driver);
+
             if (score > bestScore) {
                 bestScore = score;
                 bestDriver = driver;
