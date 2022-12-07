@@ -1,41 +1,49 @@
-# ps-code-exercise-01
+# Platform Science Code Exercise 1
 
 ---
-
-ps code exercise 1
 
 ## Setup
 
 ```bash
 npm install
+```
 
+## Running the application
+
+To run the default code exercise, run the following command:
+
+```bash
 npm run dev
 ```
 
+This will run the default code exercise with test datasets.
+
+Additionally, there are three commands available:
+
+-   `route-shipments`
+-   `best-driver`
+-   `top-five`
+
+```bash
+# run one of the available commands with the following command:
+npm run dev -- [command_name] [addresses_filename] [drivers_filename]
+```
+
+The previous command will compile the TypeScript code with `esbuild` and run the application using the provided parameters. Filenames should be absolute file paths.
+
 ## Testing
 
-`ps-code-exercise-01` uses Jest for unit tests. To run the test suite:
+This project uses Jest for unit tests. To run the test suite, run:
 
-`npm run test`
+```bash
+npm run test
+```
 
 ---
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
 
 ## Credits
 
 -   [Patrick Organ](https://github.com/patinthehat)
--   [All Contributors](../../contributors)
 
 ## License
 
