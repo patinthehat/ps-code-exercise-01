@@ -13,6 +13,8 @@ Additionally, it also can:
 -   List the top five drivers for a given address
 -   List the best driver for each shipment without considering previous shipments
 
+It is a command line application, written in TypeScript and compiled with [esbuild](https://esbuild.github.io/). See below for instructions on how to run the application.
+
 ## Assumptions
 
 This code exercise assumes the following:
