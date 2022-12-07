@@ -2,6 +2,8 @@
 
 ---
 
+[![Run Tests](https://github.com/patinthehat/ps-code-exercise-01/actions/workflows/run-tests.yml/badge.svg)](https://github.com/patinthehat/ps-code-exercise-01/actions/workflows/run-tests.yml) [![codecov](https://codecov.io/gh/patinthehat/ps-code-exercise-01/branch/main/graph/badge.svg?token=BZenrQO00O)](https://codecov.io/gh/patinthehat/ps-code-exercise-01)
+
 ## Overview
 
 This exercise takes input of a list of addresses and drivers, and outputs the best driver for each address. Once a driver has been assigned to a shipment, they cannot be assigned to another shipment. Assignments are done sequentially based on shipment (address).
