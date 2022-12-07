@@ -65,7 +65,7 @@ export class Shipment {
         let bestScore = 0;
 
         drivers.forEach(driver => {
-            const score = driver.suitabilityScoreForShipment(this); //this.suitabilityScoreForDriver(driver);
+            const score = driver.suitabilityScoreForShipment(this);
 
             if (score > bestScore) {
                 bestScore = score;

@@ -29,12 +29,11 @@ program
         addressesFile = `${__dirname}/${addressesFile}`;
         driversFile = `${__dirname}/${driversFile}`;
 
-        console.log(`Routing shipments for ${addressesFile.replace(__dirname, '.')} and ${driversFile.replace(__dirname, '.')}`);
         console.log('----');
+        console.log(`Routing shipments for ${addressesFile.replace(__dirname, '.')} and ${driversFile.replace(__dirname, '.')}`);
 
         const addressesData = readTextFileLines(addressesFile);
         const shipments: Shipment[] = addressesData.map(address => new Shipment(address));
-        const immutableShipments = shipments.slice(0);
 
         const driversData = readTextFileLines(driversFile);
         const drivers: Driver[] = driversData.map(driver => new Driver(driver));
@@ -43,24 +42,59 @@ program
 
         shipmentManager.assignShipmentsToDrivers();
 
+        console.log('----');
         console.log('Driver assignments for each shipment:');
         console.log(
             shipmentManager.assignments
                 .map(assignment => `${assignment.shipment.streetAddress} => ${assignment.driver.name} (${assignment.suitabilityScore})`)
                 .join('\n'),
         );
+    });
+
+program
+    .command('best-driver')
+    .description('Show the best driver for each shipment')
+    .argument('[addresses]', 'addresses filename', 'datasets/01/shipments.txt')
+    .argument('[driversFile]', 'drivers filename', 'datasets/01/drivers.txt')
+    .action((addressesFile, driversFile) => {
+        addressesFile = `${__dirname}/${addressesFile}`;
+        driversFile = `${__dirname}/${driversFile}`;
+
+        const addressesData = readTextFileLines(addressesFile);
+        const shipments: Shipment[] = addressesData.map(address => new Shipment(address));
+        const immutableShipments = shipments.slice(0);
+
+        const driversData = readTextFileLines(driversFile);
+        const drivers: Driver[] = driversData.map(driver => new Driver(driver));
 
         console.log('----');
-        console.log('Top drivers for each shipment:');
+        console.log('Top drivers for each shipment');
         console.log('----');
 
         immutableShipments.forEach(shipment => {
             const driver = shipment.getBestDriver(drivers);
             console.log(`Shipment: ${shipment.streetAddress}; best driver: ${driver.name} (${shipment.suitabilityScoreForDriver(driver)})`);
         });
+    });
+
+program
+    .command('top-five')
+    .description('Show top five drivers for each shipment')
+    .argument('[addresses]', 'addresses filename', 'datasets/01/shipments.txt')
+    .argument('[driversFile]', 'drivers filename', 'datasets/01/drivers.txt')
+    .action((addressesFile, driversFile) => {
+        addressesFile = `${__dirname}/${addressesFile}`;
+        driversFile = `${__dirname}/${driversFile}`;
+
+        const addressesData = readTextFileLines(addressesFile);
+        const shipments: Shipment[] = addressesData.map(address => new Shipment(address));
+        const immutableShipments = shipments.slice(0);
+
+        const driversData = readTextFileLines(driversFile);
+        const drivers: Driver[] = driversData.map(driver => new Driver(driver));
 
         console.log('----');
-        console.log('Shipment driver rankings:');
+        console.log('Top 5 Shipment/Driver Rankings');
         console.log('----');
 
         immutableShipments.forEach(shipment => {
@@ -74,7 +108,7 @@ program
 
             rankedDrivers.sort((a, b) => b.score - a.score);
 
-            rankedDrivers.forEach((ranked: { driver: Driver; score: number }) => {
+            rankedDrivers.slice(0, 5).forEach((ranked: { driver: Driver; score: number }) => {
                 console.log(`   - ${ranked.driver.name} (${ranked.score})`);
             });
         });
