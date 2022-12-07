@@ -16,6 +16,8 @@ Additionally, it can:
 This code exercise assumes the following:
 
 -   The address/shipment files contain a single address per line, in this format: `street, city, state postalCode`
+-   The address/shipment items contain state abbreviations only, not full state names (e.g. `CA` instead of `California`)
+-   The address/shipment items are US addresses only and postal codes are 5 digits
 -   The driver file contains a single driver per line, in this format: `firstName lastName`
 
 ## Setup
@@ -53,6 +55,12 @@ This project uses Jest for unit tests. To run the test suite, run:
 
 ```bash
 npm run test
+```
+
+To display the code coverage for the entire application at the file level, run:
+
+```bash
+npm run test:coverage
 ```
 
 ---
