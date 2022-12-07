@@ -15,6 +15,7 @@ Additionally, it can:
 
 This code exercise assumes the following:
 
+
 -   The address/shipment files contain a single address per line, in this format: `street, city, state postalCode`
 -   The address/shipment items contain state abbreviations only, not full state names (e.g. `CA` instead of `California`)
 -   The address/shipment items are US addresses only and postal codes are 5 digits
