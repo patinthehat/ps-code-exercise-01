@@ -4,9 +4,9 @@ import { Shipment } from '@/lib/Shipment';
 import { ShipmentManager } from '@/lib/ShipmentManager';
 
 it('returns the correct driver and score for a shipment', () => {
-    const shipments = [ new Shipment('9 Olive Avenue'), new Shipment('7192 Glendale Lane'), new Shipment('1 Main Street') ];
+    const shipments = [new Shipment('9 Olive Avenue'), new Shipment('7192 Glendale Lane'), new Shipment('1 Main Street')];
 
-    const drivers = [ new Driver('Malcolm Parker'), new Driver('Zachariah Hardwick'), new Driver('Lillian Mccormick') ];
+    const drivers = [new Driver('Malcolm Parker'), new Driver('Zachariah Hardwick'), new Driver('Lillian Mccormick')];
 
     const mgr = new ShipmentManager(shipments, drivers);
 
