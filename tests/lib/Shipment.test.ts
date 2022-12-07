@@ -24,3 +24,21 @@ it('throws an error when no drivers are provided', () => {
         shipment.getBestDriver([]);
     }).toThrowErrorMatchingSnapshot();
 });
+
+it('gets the state from the address', () => {
+    const shipment = new Shipment('9 Olive Avenue, Somewhere, CA 90210');
+
+    expect(shipment.state).toEqual('CA');
+});
+
+it('gets the postal code from the address', () => {
+    const shipment = new Shipment('9 Olive Avenue, Somewhere, CA 90210');
+
+    expect(shipment.postalCode).toEqual('90210');
+});
+
+it('gets the city from the address', () => {
+    const shipment = new Shipment('9 Olive Avenue, Somewhere, CA 90210');
+
+    expect(shipment.city).toEqual('Somewhere');
+});

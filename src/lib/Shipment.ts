@@ -18,16 +18,16 @@ export class Shipment {
     }
 
     public get state(): string {
-        const match = this.address.match(/([A-Z]{2})\s+\d{5}/);
+        const match = this.address.match(/([A-Z]{2})\s+\d{5}$/);
         if (match) {
-            return match[0];
+            return match[1];
         }
 
         return 'UNKNOWN';
     }
 
     public get postalCode(): string {
-        const match = this.address.match(/([A-Z]{2})\s+\d{5}/);
+        const match = this.address.match(/[A-Z]{2}\s+(\d{5})$/);
         if (match) {
             return match[1];
         }
@@ -51,6 +51,7 @@ export class Shipment {
 
         result = baseSuitabilityScore;
 
+        // common factors increase score by 50%
         for (let i = 2; i <= addressStats.length; i++) {
             if (addressStats.length % i === 0 && nameStats.length % i === 0) {
                 result += result * 0.5;
@@ -61,8 +62,14 @@ export class Shipment {
     }
 
     public getBestDriver(drivers: Driver[]): Driver {
-        let bestDriver: Driver | null = null;
+        let bestDriver: Driver;
         let bestScore = 0;
+
+        if (!drivers.length) {
+            throw new Error('Cannot calculate best driver: no drivers provided.');
+        }
+
+        bestDriver = drivers[0];
 
         drivers.forEach(driver => {
             const score = driver.suitabilityScoreForShipment(this);
@@ -73,6 +80,6 @@ export class Shipment {
             }
         });
 
-        return bestDriver || drivers[0];
+        return bestDriver;
     }
 }
