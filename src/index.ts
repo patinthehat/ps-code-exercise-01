@@ -3,6 +3,7 @@ import { readTextFileLines } from '@/lib/helpers';
 import { Shipment } from '@/lib/Shipment';
 import { ShipmentManager } from '@/lib/ShipmentManager';
 import { Command } from 'commander';
+import { existsSync } from 'fs';
 const program = new Command();
 
 /*
@@ -26,8 +27,13 @@ program
     .argument('[addresses]', 'addresses filename', 'datasets/01/shipments.txt')
     .argument('[driversFile]', 'drivers filename', 'datasets/01/drivers.txt')
     .action((addressesFile, driversFile, options) => {
-        addressesFile = `${__dirname}/${addressesFile}`;
-        driversFile = `${__dirname}/${driversFile}`;
+        if (!existsSync(addressesFile)) {
+            addressesFile = `${__dirname}/${addressesFile}`;
+        }
+
+        if (!existsSync(driversFile)) {
+            driversFile = `${__dirname}/${driversFile}`;
+        }
 
         console.log('----');
         console.log(`Routing shipments for ${addressesFile.replace(__dirname, '.')} and ${driversFile.replace(__dirname, '.')}`);
@@ -57,8 +63,13 @@ program
     .argument('[addresses]', 'addresses filename', 'datasets/01/shipments.txt')
     .argument('[driversFile]', 'drivers filename', 'datasets/01/drivers.txt')
     .action((addressesFile, driversFile) => {
-        addressesFile = `${__dirname}/${addressesFile}`;
-        driversFile = `${__dirname}/${driversFile}`;
+        if (!existsSync(addressesFile)) {
+            addressesFile = `${__dirname}/${addressesFile}`;
+        }
+
+        if (!existsSync(driversFile)) {
+            driversFile = `${__dirname}/${driversFile}`;
+        }
 
         const addressesData = readTextFileLines(addressesFile);
         const shipments: Shipment[] = addressesData.map(address => new Shipment(address));
@@ -83,8 +94,13 @@ program
     .argument('[addresses]', 'addresses filename', 'datasets/01/shipments.txt')
     .argument('[driversFile]', 'drivers filename', 'datasets/01/drivers.txt')
     .action((addressesFile, driversFile) => {
-        addressesFile = `${__dirname}/${addressesFile}`;
-        driversFile = `${__dirname}/${driversFile}`;
+        if (!existsSync(addressesFile)) {
+            addressesFile = `${__dirname}/${addressesFile}`;
+        }
+
+        if (!existsSync(driversFile)) {
+            driversFile = `${__dirname}/${driversFile}`;
+        }
 
         const addressesData = readTextFileLines(addressesFile);
         const shipments: Shipment[] = addressesData.map(address => new Shipment(address));
