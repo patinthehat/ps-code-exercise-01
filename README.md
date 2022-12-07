@@ -6,7 +6,7 @@
 
 This exercise takes input of a list of addresses and drivers, and outputs the best driver for each address. Once a driver has been assigned to a shipment, they cannot be assigned to another shipment. Assignments are done sequentially based on shipment (address).
 
-Additionally, it can:
+Additionally, it also can:
 
 -   List the top five drivers for a given address
 -   List the best driver for each shipment without considering previous shipments
@@ -14,7 +14,6 @@ Additionally, it can:
 ## Assumptions
 
 This code exercise assumes the following:
-
 
 -   The address/shipment files contain a single address per line, in this format: `street, city, state postalCode`
 -   The address/shipment items contain state abbreviations only, not full state names (e.g. `CA` instead of `California`)
