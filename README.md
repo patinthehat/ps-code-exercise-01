@@ -65,6 +65,16 @@ To display the code coverage for the entire application at the file level, run:
 npm run test:coverage
 ```
 
+### Coverage
+
+Sunburst:
+
+![Coverage Sunburst](https://codecov.io/gh/patinthehat/ps-code-exercise-01/branch/main/graphs/sunburst.svg?token=BZenrQO00O)
+
+Icicle:
+
+![Coverage Icicle](https://codecov.io/gh/patinthehat/ps-code-exercise-01/branch/main/graphs/icicle.svg?token=BZenrQO00O)
+
 ---
 
 ## Credits
