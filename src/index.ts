@@ -18,7 +18,7 @@ Your program should run on the command line and take as input two newline separa
 The output should be the total SS and a matching between shipment destinations and drivers. You do not need to worry about malformed input, but you should certainly handle both upper and lower case names.
 */
 
-program.name('ps-code-exercise-01').version('1.0.0');
+program.name('code-exercise-1').version('1.0.0');
 
 program
     .command('route-shipments', { isDefault: true })
