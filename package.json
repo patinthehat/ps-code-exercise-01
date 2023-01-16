@@ -74,7 +74,7 @@
         "node": ">=14.0.0"
     },
     "dependencies": {
-        "commander": "^9.4.1",
+        "commander": "^10.0.0",
         "conf": "^10.2.0",
         "js-yaml": "^4.1.0"
     }
